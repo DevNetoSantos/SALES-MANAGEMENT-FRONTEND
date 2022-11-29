@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { api } from "../../services/api";
+import { useAuth } from "../../context/AuthProvider/useAuth";
 
 interface IFormInputs {
   email: string;
@@ -14,17 +15,19 @@ const schema = yup.object({
 }).required();
 
 export const FormLogin = () => {
+  const auth = useAuth()
+
   const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>({
     resolver: yupResolver(schema)
   });
 
-  const onSubmit = (data: IFormInputs) => api.post('/auth/login', data)
-  .then(()=>{
-    console.log('login sucesso.')
-  })
-  .catch((error)=>{
-    console.log(error)
-  })
+  const onSubmit = (data: IFormInputs) => {
+    try {
+      auth.authenticate(data.email, data.password)    
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     
