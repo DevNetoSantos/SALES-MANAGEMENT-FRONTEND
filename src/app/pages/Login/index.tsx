@@ -1,7 +1,7 @@
+import styles from '../Login/Login.module.css';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { api } from "../../services/api";
 import { useAuth } from "../../context/AuthProvider/useAuth";
 
 interface IFormInputs {
@@ -14,7 +14,7 @@ const schema = yup.object({
   password: yup.string().required('campo senha e obrigatório'),
 }).required();
 
-export const FormLogin = () => {
+export const Login = () => {
   const auth = useAuth()
   
   const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>({
