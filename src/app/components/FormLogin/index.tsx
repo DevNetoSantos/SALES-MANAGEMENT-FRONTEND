@@ -16,7 +16,7 @@ const schema = yup.object({
 
 export const FormLogin = () => {
   const auth = useAuth()
-
+  
   const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>({
     resolver: yupResolver(schema)
   });

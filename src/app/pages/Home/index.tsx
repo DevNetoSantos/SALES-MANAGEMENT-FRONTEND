@@ -1,31 +1,18 @@
-import { useEffect, useState } from "react";
-import { api } from "../../services/api";
+import { Content } from '../../components/Content';
+import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
+import { Logo } from '../../components/Logo';
+import { Navbar } from '../../components/Navbar';
+import styles from '../Home/Home.module.css';
 
 export const Home = () => {
-  const [home, setHome] = useState([]);
-
-  const gestSale = async () => {
-    try {
-      const response = await api.get('sale');
-      setHome(response.data)
-    }
-
-    catch (error) {
-      alert(error)
-    }
-  }
-
-  useEffect(()=>{
-    gestSale()
-  }, []);
-
   return(
-    <>
-      {home.map((item, index) =>(
-        <div key={index}>
-          <h1>{item.product.name}</h1>
-        </div>
-      ))}
-    </>
+    <div className={styles.container}>
+      <Logo />
+      <Header />
+      <Navbar />
+      <Content />
+      <Footer />
+    </div>
   )
 }

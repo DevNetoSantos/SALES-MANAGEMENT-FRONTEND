@@ -6,8 +6,10 @@ import { Home } from "../pages/Home"
 export const AppRoutes = () => {
   return(
     <Routes>
-      <Route path='/home' element={<ProtecLayout><Home /></ProtecLayout>} />
-     
+    {/*   <Route path='/home' element={<ProtecLayout>
+        <Home />
+      </ProtecLayout>} /> */}
+      <Route path="/home"  element={<Home />}/>
       <Route path="/"  element={<FormLogin />}/>
 
       <Route path="*" element={<p>Página não encontrada</p>} />
