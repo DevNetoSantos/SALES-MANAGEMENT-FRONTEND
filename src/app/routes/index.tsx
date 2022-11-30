@@ -6,9 +6,9 @@ import { Login } from "../pages/Login"
 export const AppRoutes = () => {
   return(
     <Routes>
-    {/*   <Route path='/home' element={<ProtecLayout>
+      <Route path='/home' element={<ProtecLayout>
         <Home />
-      </ProtecLayout>} /> */}
+      </ProtecLayout>} />
       <Route path="/home"  element={<Home />}/>
       <Route path="/login"  element={<Login />}/>
 
