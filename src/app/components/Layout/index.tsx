@@ -1,21 +1,21 @@
-import { ReactElement } from "react"
 import { Footer } from "../Footer";
 import { Header } from "../Header";
 import { Logo } from "../Logo";
 import { Navbar } from "../Navbar";
 import styles from '../Layout/Layout.module.css';
+import { Outlet } from "react-router-dom";
 
 type Props = {
-  children: ReactElement
+  children: JSX.Element
 }
 
-export const Layout = ({children}: Props) => {
+export const Layout = () => {
   return(
     <div className={styles.container}>
       <Logo />
       <Header />
       <Navbar />
-      <main>{children}</main>
+      <Outlet />
       <Footer />
     </div>
   );
