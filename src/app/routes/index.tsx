@@ -13,10 +13,7 @@ export const AppRoutes = () => {
     <Routes>
       <Route path="/login"  element={<Login />}/>
 
-      <Route path='/' element={<PrivateRoute>
-        <Layout />
-      </PrivateRoute>} />
-
+      <Route element={<PrivateRoute />}>
         <Route path="/" element={<Layout />}>
           <Route path="/client"  element={<Client />}/>
           <Route path="/employee"  element={<Employee />}/>
@@ -24,6 +21,7 @@ export const AppRoutes = () => {
           <Route path="/product"  element={<Product />}/>
           <Route path="/sale"  element={<Sale />}/>
         </Route>
+      </Route>
 
       <Route path="*" element={<p>Página não encontrada</p>} />
     </Routes>
