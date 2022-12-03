@@ -12,7 +12,7 @@ export const Logo = () => {
     <div className={styles.container}>
       <div>DevNetoSantos</div>
       <div>{auth.email}</div>
-      <button className='btn' onClick={logou}>Sair</button>
+      <button className='btn btn-danger' onClick={logou}>Sair</button>
     </div>
   )
 }

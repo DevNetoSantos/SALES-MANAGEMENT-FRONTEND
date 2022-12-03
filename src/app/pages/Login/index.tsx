@@ -23,26 +23,39 @@ export const Login = () => {
 
   const onSubmit = (data: IFormInputs) => {
     try {
-      auth.authenticate(data.email, data.password)    
+      auth.authenticate(data.email, data.password)
     } catch (error) {
       console.log(error)
     }
   }
 
   return (
-    
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <div className={styles.container}>
+      <div className={styles.subContainer}>
+        <div>
+          <h1>Entrar</h1>
+        </div>
+        <div>
+          <form onSubmit={handleSubmit(onSubmit)}>
 
-      <label htmlFor="email">email</label>
-      <input type="text" {...register("email")}/>
-      <p>{errors.email?.message}</p> 
+            <div className={styles.formItem}>
+              <label htmlFor="email">email</label><br />
+              <input type="text" {...register("email")}/>
+              <p>{errors.email?.message}</p> 
+            </div>
 
-      <label htmlFor="password">senha</label>
-      <input type="password" id="" {...register('password')} />
-      <p>{errors.password?.message}</p>
-      
-      <input type="submit" />
 
-    </form>
+            <div className={styles.formItem}>
+              <label htmlFor="password">senha</label><br />
+              <input type="password" id="" {...register('password')} />
+              <p>{errors.password?.message}</p>
+            </div>
+
+            <button className='btn btn-primary' type='submit' >Login</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
