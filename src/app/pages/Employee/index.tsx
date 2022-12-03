@@ -44,6 +44,15 @@ export const Employee = () => {
     })
     setItem(response.data)
   }
+  function reverseString(str: string) {
+
+    // empty string
+    let newString = "";
+    for (let i = str.length - 1; i >= 0; i--) {
+        newString += str[i];
+    }
+    return newString;
+}
 
   return(
     <div className="">
@@ -76,21 +85,21 @@ export const Employee = () => {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <h1 className="modal-title fs-5" id="exampleModalLabel">Detalhes</h1>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div className="modal-body">
-              <p>Data Criação : {item.createdAt}</p>
-              <p>Data Atualização : {item.updatedAt}</p>
-              <p>Name : {item.name}</p>
-              <p>Sobrenome : {item.lastname}</p>
-              <p>Email : {item.email}</p>
-              <p>conta : {item.role}</p>
-
+              <h6>Data Criação : {item.createdAt.slice(0,10)}</h6>
+              <h6>Data Atualização : {item.updatedAt.slice(0,10)}</h6>
+              <h6>Name : {item.name}</h6>
+              <h6>Sobrenome : {item.lastname}</h6>
+              <h6>Email : {item.email}</h6>
+              <h6>conta : {item.role}</h6>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary">Save changes</button>
+                <button type="button" className="btn btn-primary">Editar</button>
+                <button type="button" className="btn btn-danger">Deletar</button>
               </div>
             </div>
           </div>
