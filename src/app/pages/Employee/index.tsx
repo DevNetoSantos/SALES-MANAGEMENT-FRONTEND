@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Pagination } from "../../components/Pagination";
 import { useAuth } from "../../context/AuthProvider/useAuth";
 import { api } from "../../services/api";
 import { TypeEmployee } from "../../Types/TypesEmployee";
@@ -6,6 +7,9 @@ import styles from '../Employee/Employee.module.css';
 
 export const Employee = () => {
   const [employee, setEmployee] = useState<TypeEmployee[]>([]);
+  const [takePage, setTakePage] = useState(1);
+  const [skipPage, setSkipPage] = useState(1);
+
   const [item,setItem] = useState({
     id: '',
     createdAt: '',
@@ -17,12 +21,18 @@ export const Employee = () => {
     role: '',
  })
   const auth = useAuth()
-  const take = 2
-  const skip = 1
+
+  const startIndex = skipPage * takePage;
+  const endIndex = startIndex - takePage;
+  const currentEmployee = employee.slice(endIndex, startIndex);
+
+  const paginate = (pageNumber: any) => {
+    setSkipPage(pageNumber);
+  }
 
   const getEmployee = async () => {
     try {
-      const response = await api.get(`employee?take=${take}&skip=${skip}`, {
+      const response = await api.get(`employee`, {
         headers: {
           Authorization: `Bearer ${auth.access_token}`
         }
@@ -60,7 +70,7 @@ export const Employee = () => {
           </tr>
         </thead>
         <tbody>
-          {employee.map((item, index)=> (
+          {currentEmployee.map((item, index)=> (
             <tr key={index}>
               <td>{item.name}</td>
               <td>{item.lastname}</td>
@@ -74,25 +84,9 @@ export const Employee = () => {
           ))}
         </tbody>
       </table>
-      <div className={styles.pagination}>
-        <nav aria-label="Page navigation example">
-          <ul className="pagination">
-            <li className="page-item">
-              <a className="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li className="page-item"><a className="page-link" href="#">1</a></li>
-            <li className="page-item"><a className="page-link" href="#">2</a></li>
-            <li className="page-item"><a className="page-link" href="#">3</a></li>
-            <li className="page-item">
-              <a className="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+
+      <Pagination takePage={takePage} totalNames={employee.length} paginate={paginate}/>
+
       <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog">
           <div className="modal-content">

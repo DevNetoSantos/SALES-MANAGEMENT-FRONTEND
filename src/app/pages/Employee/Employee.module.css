@@ -3,9 +3,3 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
-.pagination {
-  display: flex;
-  justify-content: end;
-  margin-right: 40px;
-}
