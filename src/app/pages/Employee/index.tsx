@@ -7,7 +7,7 @@ import styles from '../Employee/Employee.module.css';
 
 export const Employee = () => {
   const [employee, setEmployee] = useState<TypeEmployee[]>([]);
-  const [takePage, setTakePage] = useState(1);
+  const [takePage, setTakePage] = useState(1); //mudar depois para 5
   const [skipPage, setSkipPage] = useState(1);
 
   const [item,setItem] = useState({

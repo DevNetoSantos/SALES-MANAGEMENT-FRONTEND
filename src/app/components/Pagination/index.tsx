@@ -14,7 +14,7 @@ export const Pagination = ({takePage, totalNames, paginate}: any) => {
           {pageNumber.map(number =>(
             <li className='page-item' key={number}>
               <a onClick={() => paginate(number)} href="#" className='page-link'>{number}</a>
-            </li>  
+            </li>
           ))}
         </ul>
       </nav>
