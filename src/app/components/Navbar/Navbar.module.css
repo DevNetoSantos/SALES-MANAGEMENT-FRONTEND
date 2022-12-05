@@ -13,3 +13,8 @@
 .item {
   display: flex;
 }
+
+a:hover, a:focus {
+ background-color: red;
+ border-radius: 10px;
+}
