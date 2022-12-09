@@ -1,5 +1,7 @@
 .pagination {
   display: flex;
   justify-content: end;
-  margin-right: 40px;
+  position: absolute;
+  bottom: 135px;
+  right: 40px;
 }

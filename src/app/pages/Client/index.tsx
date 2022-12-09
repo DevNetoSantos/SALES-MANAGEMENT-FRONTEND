@@ -4,6 +4,7 @@ import { TypeClient } from '../../Types/TypesClient';
 import { api } from '../../services/api';
 import { useAuth } from '../../context/AuthProvider/useAuth';
 import { Pagination } from '../../components/Pagination';
+import { NewClient } from '../../components/NewClient';
 
 export const Client = () => {
   const [client, setClient] = useState<TypeClient[]>([]);
@@ -55,6 +56,7 @@ export const Client = () => {
 
   return(
     <div className={styles.container}>
+      <NewClient />
       <table className="table">
         <thead>
           <tr>
