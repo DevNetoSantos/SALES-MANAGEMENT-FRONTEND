@@ -8,7 +8,7 @@ import { NewClient } from '../../components/NewClient';
 
 export const Client = () => {
   const [client, setClient] = useState<TypeClient[]>([]);
-  const [takePage, setTakePage] = useState(1); //mudar depois para 5
+  const [takePage, setTakePage] = useState(8);
   const [skipPage, setSkipPage] = useState(1);
   const [item,setItem] = useState({
     id: '',
@@ -26,7 +26,6 @@ export const Client = () => {
   const paginate = (pageNumber: any) => {
     setSkipPage(pageNumber);
   }
-
 
   useEffect(() =>{
     const fetchCliet = async () => {
@@ -54,15 +53,30 @@ export const Client = () => {
     setItem(response.data)
   }
 
+  const deleteClient = async (id: number) => {
+    await api.delete(`client/${id}`, {
+      headers: {
+        Authorization: `Bearer ${auth.access_token}`
+      }
+    })
+    .then(()=>{
+      window.location.reload()
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
+
   return(
     <div className={styles.container}>
-      <NewClient />
+      <h1>Clientes</h1>
+      <hr />
       <table className="table">
         <thead>
           <tr>
             <th scope="col">Nome</th>
             <th scope="col">CPF</th>
-            <th scope="col">Action</th>
+            <th scope="col">Detalhes</th>
           </tr>
         </thead>
         <tbody>
@@ -72,13 +86,15 @@ export const Client = () => {
               <td>{item.cpf}</td>
               <td>
                 <button type="button" className="btn btn-primary"  onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  View
+                  Detalhe
                 </button>
               </td>
             </tr>  
           ))}
         </tbody>
       </table>
+
+      <NewClient />
 
       <Pagination takePage={takePage} totalNames={client.length} paginate={paginate}/>
 
@@ -98,7 +114,7 @@ export const Client = () => {
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button type="button" className="btn btn-primary">Editar</button>
-              <button type="button" className="btn btn-danger">Deletar</button>
+              <button type="button" className="btn btn-danger" onClick={(e)=>deleteClient(parseInt(item.id))} >Deletar</button>
             </div>
           </div>
         </div>

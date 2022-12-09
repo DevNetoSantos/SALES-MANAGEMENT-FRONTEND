@@ -1,0 +1,7 @@
+.container {
+  display: flex;
+  justify-content: end;
+  position: absolute;
+  bottom: 150px;
+  left: 285px;
+}

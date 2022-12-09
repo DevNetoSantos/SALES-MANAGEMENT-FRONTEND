@@ -12,7 +12,7 @@ interface IFormInputs {
 
 const schema = yup.object({
   name: yup.string().required('campo nome e obrigatório'),
-  cpf: yup.string().required('campo cpf e obrigatório'),
+  cpf: yup.string().required('campo cpf e obrigatório').min(11, 'cpf deve ter pelo menos 11 caracteres').max(11, 'cpf deve ter no máximo 11 caracteres'),
 }).required();
 
 export const NewClient = () => {
@@ -27,12 +27,15 @@ const onSubmit = async (data: IFormInputs) => api.post('client', data, {
     Authorization: `Bearer ${auth.access_token}`
   }
 })
+.then(()=>{
+  window.location.reload()
+})
 .catch((error)=>{
   console.log(error)
 })
 
   return(
-    <div className=''>
+    <div className={styles.container}>
       <button type="button" className="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModall">
       Novo Cliente
       </button>
@@ -45,7 +48,7 @@ const onSubmit = async (data: IFormInputs) => api.post('client', data, {
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
-              <div className={styles.subContainer}>
+              <div className="">
                 <div>
                   <form onSubmit={handleSubmit(onSubmit)}>
 
