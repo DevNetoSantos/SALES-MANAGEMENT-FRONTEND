@@ -69,7 +69,15 @@ export const Client = () => {
 
   return(
     <div className={styles.container}>
-      <h1>Clientes</h1>
+      <div className={styles.containerTitle}>
+        <NewClient />
+        <div className={styles.buttonTitle}>
+          <input type="search" placeholder='Buscar' />
+        </div>
+        <div>
+          <h1>Clientes</h1>
+        </div>
+      </div>
       <hr />
       <table className="table">
         <thead>
@@ -93,8 +101,6 @@ export const Client = () => {
           ))}
         </tbody>
       </table>
-
-      <NewClient />
 
       <Pagination takePage={takePage} totalNames={client.length} paginate={paginate}/>
 

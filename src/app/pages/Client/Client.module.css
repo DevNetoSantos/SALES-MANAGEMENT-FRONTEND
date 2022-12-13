@@ -6,3 +6,15 @@
 h1 {
   text-align: center;
 }
+
+.buttonTitle input {
+  display: flex;
+  justify-content: end;
+  position: absolute;
+  margin-top: 8px;
+  margin-left: 125px;
+  outline: none;
+  border-radius: 10px;
+  border: 0;
+  height: 35px;
+}
