@@ -5,6 +5,7 @@ import { api } from '../../services/api';
 import { useAuth } from '../../context/AuthProvider/useAuth';
 import { Pagination } from '../../components/Pagination';
 import { NewClient } from '../../components/NewClient';
+import { EditClient } from '../../components/EditClient';
 
 export const Client = () => {
   const [client, setClient] = useState<TypeClient[]>([]);
@@ -84,7 +85,7 @@ export const Client = () => {
           <tr>
             <th scope="col">Nome</th>
             <th scope="col">CPF</th>
-            <th scope="col">Detalhes</th>
+            <th className={styles.thAction} scope="col">Ação</th>
           </tr>
         </thead>
         <tbody>
@@ -92,10 +93,12 @@ export const Client = () => {
             <tr key={index}>
               <td>{item.name}</td>
               <td>{item.cpf}</td>
-              <td>
-                <button type="button" className="btn btn-primary"  onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  Detalhe
-                </button>
+              <td className={styles.tdAction}>
+                  <button type="button" className="btn btn-info"  onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Detalhe
+                  </button>
+                  <EditClient />
+                  <button type="button" className="btn btn-danger" onClick={(e)=>deleteClient(item.id)} >Deletar</button>
               </td>
             </tr>  
           ))}
@@ -119,8 +122,6 @@ export const Client = () => {
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" className="btn btn-primary">Editar</button>
-              <button type="button" className="btn btn-danger" onClick={(e)=>deleteClient(parseInt(item.id))} >Deletar</button>
             </div>
           </div>
         </div>

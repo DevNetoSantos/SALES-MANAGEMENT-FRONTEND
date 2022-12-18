@@ -18,3 +18,13 @@ h1 {
   border: 0;
   height: 35px;
 }
+
+.tdAction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.thAction {
+  text-align: center;
+}
