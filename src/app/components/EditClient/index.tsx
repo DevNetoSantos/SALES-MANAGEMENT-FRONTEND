@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../../context/AuthProvider/useAuth';
 import * as yup from "yup";
 import { useEffect, useState } from 'react';
+import { TypeClient } from '../../Types/TypesClient';
 
 interface IFormInputs {
   name: string;
@@ -17,6 +18,7 @@ const schema = yup.object({
 }).required();
 
 export const EditClient = () => {
+ const [client, setClient] = useState<TypeClient[]>([]);
  const auth = useAuth()
  const [item,setItem] = useState({
   id: '',
@@ -30,6 +32,22 @@ export const EditClient = () => {
   resolver: yupResolver(schema)
 });
 
+useEffect(() =>{
+  const fetchCliet = async () => {
+    try {
+      const response = await api.get('client', {
+        headers: {
+          Authorization: `Bearer ${auth.access_token}`
+        }
+      });
+      setClient(response.data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  fetchCliet();
+}, []);
+
 const showDetail = async (id: number) =>
 {
   const response = await api.get(`client/${id}`, {
@@ -39,8 +57,7 @@ const showDetail = async (id: number) =>
   })
   setItem(response.data)
 }
-
- useEffect(()=>{
+useEffect(()=>{
   api.get(`client/${item.id}`, {
     headers: {
       Authorization: `Bearer ${auth.access_token}`
@@ -67,8 +84,8 @@ const onSubmit = async (data: IFormInputs) => await api.put(`client`, data, {
   return(
     <div className={styles.container}>
 
-      <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalll">
-      Editar
+      <button type="button" className="btn btn-primary" onClick={(e) => showDetail(parseInt(item.id))} data-bs-toggle="modal" data-bs-target="#exampleModalll">
+        Editar
       </button>
 
       <div className="modal fade" id="exampleModalll" aria-labelledby="exampleModalLabel" aria-hidden="true">

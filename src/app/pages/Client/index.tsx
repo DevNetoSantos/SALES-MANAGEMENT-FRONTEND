@@ -6,6 +6,19 @@ import { useAuth } from '../../context/AuthProvider/useAuth';
 import { Pagination } from '../../components/Pagination';
 import { NewClient } from '../../components/NewClient';
 import { EditClient } from '../../components/EditClient';
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+
+interface IFormInputs {
+  name: string;
+  cpf: string;
+}
+
+const schema = yup.object({
+  name: yup.string().required('campo nome e obrigatório'),
+  cpf: yup.string().required('campo cpf e obrigatório').min(11, 'cpf deve ter pelo menos 11 caracteres').max(11, 'cpf deve ter no máximo 11 caracteres'),
+}).required();
 
 export const Client = () => {
   const [client, setClient] = useState<TypeClient[]>([]);
@@ -44,6 +57,7 @@ export const Client = () => {
     fetchCliet();
   }, []);
 
+
   const showDetail = async (id: number) =>
   {
     const response = await api.get(`client/${id}`, {
@@ -68,6 +82,22 @@ export const Client = () => {
     })
   }
 
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<IFormInputs>({
+    resolver: yupResolver(schema)
+  });
+
+  const onSubmit = async (data: IFormInputs) => await api.put(`client`, data, {
+    headers: {
+      Authorization: `Bearer ${auth.access_token}`
+    }
+  })
+  .then(()=>{
+    window.location.reload()
+  })
+  .catch((error)=>{
+    console.log(error)
+  })
+
   return(
     <div className={styles.container}>
       <div className={styles.containerTitle}>
@@ -89,18 +119,20 @@ export const Client = () => {
           </tr>
         </thead>
         <tbody>
-          {currentClient.map((item, index) =>(
-            <tr key={index}>
+          {currentClient.map((item) =>(
+            <tr key={item.id}>
               <td>{item.name}</td>
               <td>{item.cpf}</td>
               <td className={styles.tdAction}>
                   <button type="button" className="btn btn-info"  onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Detalhe
                   </button>
-                  <EditClient />
+                  <button type="button" className="btn btn-primary" onClick={(e) => showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModalll">
+                    Editar
+                  </button>
                   <button type="button" className="btn btn-danger" onClick={(e)=>deleteClient(item.id)} >Deletar</button>
               </td>
-            </tr>  
+            </tr>
           ))}
         </tbody>
       </table>
@@ -119,6 +151,44 @@ export const Client = () => {
             <h6>Data Atualização : {item.updatedAt.slice(0,10)}</h6>
             <h6>Name : {item.name}</h6>
             <h6>Cpf : {item.cpf}</h6>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="modal fade" id="exampleModalll" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">Editar</h1>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              <div className="">
+                <div>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+
+                    <div className={styles.formItem}>
+                      <label htmlFor="name">Nome</label><br />
+                      <input type="text" {...register("name")} />
+                      <p>{errors.name?.message}</p> 
+                    </div>
+
+
+                    <div className={styles.formItem}>
+                      <label htmlFor="cpf">CPF</label><br />
+                      <input type="cpf" id="" {...register('cpf')} />
+                      <p>{errors.cpf?.message}</p>
+                    </div>
+
+                    <button className='btn btn-primary' type='submit' >Salvar</button>
+
+                  </form>
+                </div>
+              </div>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
