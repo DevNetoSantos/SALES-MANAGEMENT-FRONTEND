@@ -4,3 +4,22 @@
   position: absolute;
   margin-top: 6px;
 }
+
+.areaForm {
+  background-color: #DAA520;
+  padding: 50px;
+  border-radius: 10px;
+}
+
+.formItem input {
+  height: 40px;
+  outline: none;
+}
+
+.formItem label {
+  font-size: 20px;
+}
+
+.formItem p {
+  color: red;
+}

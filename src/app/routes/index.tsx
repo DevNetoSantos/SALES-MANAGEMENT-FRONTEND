@@ -5,6 +5,7 @@ import { Client } from "../pages/Client"
 import { Company } from "../pages/Company"
 import { Employee } from "../pages/Employee"
 import { Login } from "../pages/Login"
+import { AddClient } from "../pages/AddClient"
 import { Product } from "../pages/Product"
 import { Sale } from "../pages/Sale"
 
@@ -16,6 +17,7 @@ export const AppRoutes = () => {
       <Route element={<PrivateRoute />}>
         <Route path="/" element={<Layout />}>
           <Route path="/client"  element={<Client />}/>
+          <Route path="/newclient"  element={<AddClient />}/>
           <Route path="/employee"  element={<Employee />}/>
           <Route path="/company"  element={<Company />}/>
           <Route path="/product"  element={<Product />}/>

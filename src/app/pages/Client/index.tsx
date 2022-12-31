@@ -4,11 +4,10 @@ import { TypeClient } from '../../Types/TypesClient';
 import { api } from '../../services/api';
 import { useAuth } from '../../context/AuthProvider/useAuth';
 import { Pagination } from '../../components/Pagination';
-import { NewClient } from '../../components/NewClient';
-import { EditClient } from '../../components/EditClient';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { Link } from 'react-router-dom';
 
 interface IFormInputs {
   name: string;
@@ -86,7 +85,7 @@ export const Client = () => {
     resolver: yupResolver(schema)
   });
 
-  const onSubmit = async (data: IFormInputs) => await api.put(`client`, data, {
+  const onSubmit = async (data: IFormInputs) => await api.put(`client/${item.id}`, data, {
     headers: {
       Authorization: `Bearer ${auth.access_token}`
     }
@@ -101,7 +100,9 @@ export const Client = () => {
   return(
     <div className={styles.container}>
       <div className={styles.containerTitle}>
-        <NewClient />
+      <Link to="/newclient">
+        <button className='btn btn-primary'>Novo Cliente</button>
+      </Link>
         <div className={styles.buttonTitle}>
           <input type="search" placeholder='Buscar' />
         </div>
@@ -173,7 +174,7 @@ export const Client = () => {
 
                     <div className={styles.formItem}>
                       <label htmlFor="name">Nome</label><br />
-                      <input type="text" {...register("name")} />
+                      <input type="text" {...register("name")}/>
                       <p>{errors.name?.message}</p> 
                     </div>
 

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../../context/AuthProvider/useAuth';
 import * as yup from "yup";
+import { useNavigate } from 'react-router-dom';
 
 interface IFormInputs {
   name: string;
@@ -17,6 +18,7 @@ const schema = yup.object({
 
 export const NewClient = () => {
  const auth = useAuth()
+ let navigate = useNavigate();
 
  const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>({
   resolver: yupResolver(schema)
@@ -28,7 +30,7 @@ const onSubmit = async (data: IFormInputs) => api.post('client', data, {
   }
 })
 .then(()=>{
-  window.location.reload()
+  return navigate("/client");
 })
 .catch((error)=>{
   console.log(error)
@@ -36,47 +38,26 @@ const onSubmit = async (data: IFormInputs) => api.post('client', data, {
 
   return(
     <div className={styles.container}>
-      <button type="button" className="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModall">
-      Novo Cliente
-      </button>
+        <div className={styles.areaForm}>
+          <form onSubmit={handleSubmit(onSubmit)}>
 
-      <div className="modal fade" id="exampleModall" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">Novo Cliente</h1>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className={styles.formItem}>
+              <label htmlFor="name">Nome</label><br />
+              <input type="text" {...register("name")}/>
+              <p>{errors.name?.message}</p> 
             </div>
-            <div className="modal-body">
-              <div className="">
-                <div>
-                  <form onSubmit={handleSubmit(onSubmit)}>
-
-                    <div className={styles.formItem}>
-                      <label htmlFor="name">Nome</label><br />
-                      <input type="text" {...register("name")}/>
-                      <p>{errors.name?.message}</p> 
-                    </div>
 
 
-                    <div className={styles.formItem}>
-                      <label htmlFor="cpf">CPF</label><br />
-                      <input type="cpf" id="" {...register('cpf')} />
-                      <p>{errors.cpf?.message}</p>
-                    </div>
-
-                    <button className='btn btn-primary' type='submit' >Criar</button>
-
-                  </form>
-                </div>
-              </div>
+            <div className={styles.formItem}>
+              <label htmlFor="cpf">CPF</label><br />
+              <input type="cpf" id="" {...register('cpf')} />
+              <p>{errors.cpf?.message}</p>
             </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
+
+            <button className='btn btn-primary' type='submit' >Criar</button>
+
+          </form>
         </div>
-      </div>
     </div>
   )
 }
