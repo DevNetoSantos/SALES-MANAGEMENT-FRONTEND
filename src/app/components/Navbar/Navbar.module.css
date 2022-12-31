@@ -14,7 +14,7 @@
   display: flex;
 }
 
-a:hover, a:focus {
+nav a:hover, nav a:focus {
  background-color: red;
  border-radius: 10px;
 }

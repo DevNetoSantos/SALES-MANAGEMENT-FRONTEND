@@ -3,6 +3,10 @@
   flex-direction: column;
 }
 
+.containerTitle {
+  display: flex;
+}
+
 h1 {
   text-align: center;
 }
@@ -11,8 +15,8 @@ h1 {
   display: flex;
   justify-content: end;
   position: absolute;
-  margin-top: 8px;
-  margin-left: 125px;
+  margin-left: 12px;
+  margin-top: 2px;
   outline: none;
   border-radius: 10px;
   border: 0;

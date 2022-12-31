@@ -8,6 +8,7 @@ import { Login } from "../pages/Login"
 import { AddClient } from "../pages/AddClient"
 import { Product } from "../pages/Product"
 import { Sale } from "../pages/Sale"
+import { AlterClient } from "../pages/AlterClient"
 
 export const AppRoutes = () => {
   return(
@@ -18,6 +19,7 @@ export const AppRoutes = () => {
         <Route path="/" element={<Layout />}>
           <Route path="/client"  element={<Client />}/>
           <Route path="/newclient"  element={<AddClient />}/>
+          <Route path="/editclient"  element={<AlterClient />}/>
           <Route path="/employee"  element={<Employee />}/>
           <Route path="/company"  element={<Company />}/>
           <Route path="/product"  element={<Product />}/>
