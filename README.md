@@ -10,8 +10,8 @@
 # Image project
 
 ![login](https://user-images.githubusercontent.com/89228679/206308771-a469938e-1947-41b4-a68e-a51937d45b4b.png)
-![base](https://user-images.githubusercontent.com/89228679/206308784-0b3a9490-c2e6-40b2-b04e-593bff90fe00.png)
-![basemodal](https://user-images.githubusercontent.com/89228679/206308795-459a48f9-4ca4-45e8-a103-20d78a2c7d42.png)
+![dasboard](https://user-images.githubusercontent.com/89228679/210173325-73c35e8c-9fb9-49ea-88fe-fe43019b3ff7.png)
+![dasdetails](https://user-images.githubusercontent.com/89228679/210173361-e79af692-f704-49cf-9efd-abd360de24b6.png)
 
 
 ## Stay in touch

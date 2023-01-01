@@ -7,3 +7,14 @@
   justify-content: center;
   align-items: center;
 }
+
+.logoutButton {
+  display: flex;
+  margin-top: 5px;
+}
+
+.iconLogo {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
