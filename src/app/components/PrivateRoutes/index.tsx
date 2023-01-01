@@ -1,9 +1,9 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider/useAuth";
 import styles from '../PrivateRoutes/PrivateRoutes.module.css';
 
   export const PrivateRoute = () => {
-  const auth = useAuth()
+  const auth = useAuth();
 
   if(!auth.access_token) {
     return(
@@ -18,5 +18,5 @@ import styles from '../PrivateRoutes/PrivateRoutes.module.css';
     )
   }
 
-  return <Outlet />;
+  return <Outlet />
 }

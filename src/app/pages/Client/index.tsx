@@ -5,6 +5,8 @@ import { api } from '../../services/api';
 import { useAuth } from '../../context/AuthProvider/useAuth';
 import { Pagination } from '../../components/Pagination';
 import { Link } from 'react-router-dom';
+import { TbListDetails } from 'react-icons/tb';
+import { AiFillEdit, AiFillDelete } from 'react-icons/ai'
 
 export const Client = () => {
   const [client, setClient] = useState<TypeClient[]>([]);
@@ -103,13 +105,11 @@ export const Client = () => {
               <td>{item.name}</td>
               <td>{item.cpf}</td>
               <td className={styles.tdAction}>
-                  <button type="button" className="btn btn-info"  onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Detalhe
-                  </button>
-                  <Link to={{pathname: `/editclient/${item.id}`}}>
-                    <button className='btn btn-primary'>Editar</button>
-                  </Link>
-                  <button type="button" className="btn btn-danger" onClick={(e)=>deleteClient(item.id)} >Deletar</button>
+                <TbListDetails className={styles.iconsAction} onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal"/>
+                <Link to={{pathname: `/editclient/${item.id}`}}>
+                  <AiFillEdit className={styles.iconsAction} />
+                </Link>
+                <AiFillDelete className={styles.iconsAction} onClick={(e)=>deleteClient(item.id)} />
               </td>
             </tr>
           ))}

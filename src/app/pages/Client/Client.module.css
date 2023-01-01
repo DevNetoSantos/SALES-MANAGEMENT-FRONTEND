@@ -32,3 +32,10 @@ h1 {
 .thAction {
   text-align: center;
 }
+
+.iconsAction {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  margin-left: 5px;
+}
