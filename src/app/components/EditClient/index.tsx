@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../../context/AuthProvider/useAuth';
 import * as yup from "yup";
-import { useEffect, useState } from 'react';
-import { TypeClient } from '../../Types/TypesClient';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 interface IFormInputs {
   name: string;
@@ -18,112 +18,61 @@ const schema = yup.object({
 }).required();
 
 export const EditClient = () => {
- const [client, setClient] = useState<TypeClient[]>([]);
  const auth = useAuth()
- const [item,setItem] = useState({
-  id: '',
-  createdAt: '',
-  updatedAt: '',
-  name: '',
-  cpf: ''
-})
+ const { id } = useParams();
+ let navigate = useNavigate()
 
  const { register, handleSubmit, setValue, formState: { errors } } = useForm<IFormInputs>({
   resolver: yupResolver(schema)
 });
 
-useEffect(() =>{
-  const fetchCliet = async () => {
-    try {
-      const response = await api.get('client', {
-        headers: {
-          Authorization: `Bearer ${auth.access_token}`
-        }
-      });
-      setClient(response.data);
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  fetchCliet();
-}, []);
 
-const showDetail = async (id: number) =>
-{
-  const response = await api.get(`client/${id}`, {
-    headers: {
-      Authorization: `Bearer ${auth.access_token}`
-    }
-  })
-  setItem(response.data)
-}
-useEffect(()=>{
-  api.get(`client/${item.id}`, {
+
+ useEffect(()=>{
+  api.get(`client/${id}`, {
     headers: {
       Authorization: `Bearer ${auth.access_token}`
     }
   })
   .then((res)=>{
-    setValue('name', res.data.user.name)
-    setValue('cpf', res.data.user.cpf)
+    setValue('name', res.data.name)
+    setValue('cpf', res.data.cpf)
   })
 }, []) 
 
-const onSubmit = async (data: IFormInputs) => await api.put(`client`, data, {
+const onSubmit = async (data: IFormInputs) => await api.patch(`client/${id}`, data, {
   headers: {
     Authorization: `Bearer ${auth.access_token}`
   }
-})
-.then(()=>{
-  window.location.reload()
-})
-.catch((error)=>{
-  console.log(error)
-})
+  })
+  .then(()=>{
+    return navigate("/client");
+  })
+  .catch((error)=>{
+    console.log(error)
+  })
 
   return(
     <div className={styles.container}>
+      <div>
+        <form onSubmit={handleSubmit(onSubmit)}>
 
-      <button type="button" className="btn btn-primary" onClick={(e) => showDetail(parseInt(item.id))} data-bs-toggle="modal" data-bs-target="#exampleModalll">
-        Editar
-      </button>
-
-      <div className="modal fade" id="exampleModalll" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">Editar</h1>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body">
-              <div className="">
-                <div>
-                  <form onSubmit={handleSubmit(onSubmit)}>
-
-                    <div className={styles.formItem}>
-                      <label htmlFor="name">Nome</label><br />
-                      <input type="text" {...register("name")}/>
-                      <p>{errors.name?.message}</p> 
-                    </div>
-
-
-                    <div className={styles.formItem}>
-                      <label htmlFor="cpf">CPF</label><br />
-                      <input type="cpf" id="" {...register('cpf')} />
-                      <p>{errors.cpf?.message}</p>
-                    </div>
-
-                    <button className='btn btn-primary' type='submit' >Salvar</button>
-
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
+          <div className={styles.formItem}>
+            <label htmlFor="name">Nome</label><br />
+            <input type="text" {...register("name")}/>
+            <p>{errors.name?.message}</p> 
           </div>
-        </div>
+
+
+          <div className={styles.formItem}>
+            <label htmlFor="cpf">CPF</label><br />
+            <input type="cpf" id="" {...register('cpf')} />
+            <p>{errors.cpf?.message}</p>
+          </div>
+
+          <button className='btn btn-primary' type='submit' >Salvar</button>
+
+        </form>
       </div>
     </div>
   )

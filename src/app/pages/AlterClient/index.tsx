@@ -1,5 +1,9 @@
+import { EditClient } from "../../components/EditClient"
+
 export const AlterClient = () => {
   return(
-    <div>Editar Cliente</div>
+    <div>
+      <EditClient />
+    </div>
   )
 }

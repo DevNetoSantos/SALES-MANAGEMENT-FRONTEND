@@ -19,7 +19,7 @@ export const AppRoutes = () => {
         <Route path="/" element={<Layout />}>
           <Route path="/client"  element={<Client />}/>
           <Route path="/newclient"  element={<AddClient />}/>
-          <Route path="/editclient"  element={<AlterClient />}/>
+          <Route path="/editclient/:id"  element={<AlterClient />}/>
           <Route path="/employee"  element={<Employee />}/>
           <Route path="/company"  element={<Company />}/>
           <Route path="/product"  element={<Product />}/>

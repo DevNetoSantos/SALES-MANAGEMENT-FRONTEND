@@ -99,7 +99,7 @@ export const Client = () => {
                   <button type="button" className="btn btn-info"  onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Detalhe
                   </button>
-                  <Link to="/editclient">
+                  <Link to={{pathname: `/editclient/${item.id}`}}>
                     <button className='btn btn-primary'>Editar</button>
                   </Link>
                   <button type="button" className="btn btn-danger" onClick={(e)=>deleteClient(item.id)} >Deletar</button>
