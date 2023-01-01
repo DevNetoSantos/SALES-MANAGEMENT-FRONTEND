@@ -10,7 +10,6 @@ export const Logo = () => {
 
   return(
     <div className={styles.container}>
-      <div>DevNetoSantos</div>
       <div>{auth.email}</div>
       <button className='btn btn-danger' onClick={logou}>Sair</button>
     </div>

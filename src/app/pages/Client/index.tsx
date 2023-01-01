@@ -10,6 +10,7 @@ export const Client = () => {
   const [client, setClient] = useState<TypeClient[]>([]);
   const [takePage, setTakePage] = useState(8);
   const [skipPage, setSkipPage] = useState(1);
+  const [search, setSearch] = useState('');
   const [item,setItem] = useState({
     id: '',
     createdAt: '',
@@ -30,7 +31,7 @@ export const Client = () => {
   useEffect(() =>{
     const fetchCliet = async () => {
       try {
-        const response = await api.get('client', {
+        const response = await api.get(`client`, {
           headers: {
             Authorization: `Bearer ${auth.access_token}`
           }
@@ -67,6 +68,9 @@ export const Client = () => {
       console.log(error)
     })
   }
+  const searchLowercase = search.toLocaleLowerCase();
+  const teams =  currentClient.filter((team) =>
+    team.name.toLocaleLowerCase().includes(searchLowercase)) //button search
 
   return(
     <div className={styles.container}>
@@ -75,8 +79,11 @@ export const Client = () => {
           <button className='btn btn-primary'>Novo Cliente</button>
         </Link>
         <div className={styles.buttonTitle}>
-          <input type="search" placeholder='Buscar' />
-        </div>
+          <input type='search' placeholder='Buscar'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          />
+        </div> 
       </div>
       <div>
         <h1>Clientes</h1>
@@ -91,7 +98,7 @@ export const Client = () => {
           </tr>
         </thead>
         <tbody>
-          {currentClient.map((item) =>(
+          {teams.map((item) =>(
             <tr key={item.id}>
               <td>{item.name}</td>
               <td>{item.cpf}</td>
