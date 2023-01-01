@@ -1,8 +1,9 @@
 import { EditClient } from "../../components/EditClient"
+import styles from '../AlterClient/Alter.module.css'
 
 export const AlterClient = () => {
   return(
-    <div>
+    <div className={styles.container}>
       <EditClient />
     </div>
   )

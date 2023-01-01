@@ -41,6 +41,10 @@ const onSubmit = async (data: IFormInputs) => api.post('client', data, {
         <div className={styles.areaForm}>
           <form onSubmit={handleSubmit(onSubmit)}>
 
+            <div>
+              <h1>Novo Cliente</h1>
+            </div>
+            <hr />
             <div className={styles.formItem}>
               <label htmlFor="name">Nome</label><br />
               <input type="text" {...register("name")}/>

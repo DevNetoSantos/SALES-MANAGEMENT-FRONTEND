@@ -54,9 +54,12 @@ const onSubmit = async (data: IFormInputs) => await api.patch(`client/${id}`, da
 
   return(
     <div className={styles.container}>
-      <div>
+      <div className={styles.areaForm}>
         <form onSubmit={handleSubmit(onSubmit)}>
-
+          <div>
+            <h1>Editar Cliente</h1>
+          </div>
+          <hr />
           <div className={styles.formItem}>
             <label htmlFor="name">Nome</label><br />
             <input type="text" {...register("name")}/>
