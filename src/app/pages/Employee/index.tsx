@@ -12,6 +12,7 @@ export const Employee = () => {
   const [employee, setEmployee] = useState<TypeEmployee[]>([]);
   const [takePage, setTakePage] = useState(8); //number pagination
   const [skipPage, setSkipPage] = useState(1);
+  const [search, setSearch] = useState('');
 
   const [item,setItem] = useState({
     id: '',
@@ -75,6 +76,10 @@ export const Employee = () => {
     setItem(response.data)
   }
 
+  const searchLowercase = search.toLocaleLowerCase();
+  const teams =  currentEmployee.filter((team) =>
+    team.name.toLocaleLowerCase().includes(searchLowercase)) //button search
+
   return(
     <div className={styles.container}>
       <div className={styles.containerTitle}>
@@ -83,8 +88,8 @@ export const Employee = () => {
         </Link>
         <div className={styles.buttonTitle}>
           <input type='search' placeholder='Buscar'
-          //value={search}
-          //onChange={(e) => setSearch(e.target.value)}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       </div>
@@ -101,7 +106,7 @@ export const Employee = () => {
           </tr>
         </thead>
         <tbody>
-          {currentEmployee.map((item, index)=> (
+          {teams.map((item, index)=> (
             <tr key={index}>
               <td>{item.name}</td>
               <td>{item.lastname}</td>
