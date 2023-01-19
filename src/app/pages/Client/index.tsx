@@ -85,7 +85,7 @@ export const Client = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           />
-        </div> 
+        </div>
       </div>
       <div>
         <h1>Clientes</h1>

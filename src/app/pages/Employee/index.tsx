@@ -77,6 +77,20 @@ export const Employee = () => {
 
   return(
     <div className={styles.container}>
+      <div className={styles.containerTitle}>
+        <Link className='link' to="/newemployee">
+          <button className='btn btn-primary'>Novo Funcionário</button>
+        </Link>
+        <div className={styles.buttonTitle}>
+          <input type='search' placeholder='Buscar'
+          //value={search}
+          //onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+      </div>
+      <div>
+        <h1>funcionários</h1>
+      </div>
       <table className="table">
         <thead className=''>
           <tr>
@@ -92,9 +106,9 @@ export const Employee = () => {
               <td>{item.name}</td>
               <td>{item.lastname}</td>
               <td>{item.email}</td>
-              <td>
+              <td className={styles.tdAction}>
                 <TbListDetails className={styles.iconsAction} onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal"/>
-                <Link to="#">
+                <Link to={{pathname: `/editemployee/${item.id}`}}>
                   <AiFillEdit className={styles.iconsAction} />
                 </Link>
                 <AiFillDelete className={styles.iconsAction} onClick={(e)=>deleteEmployee(item.id)} />
@@ -123,8 +137,6 @@ export const Employee = () => {
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" className="btn btn-primary">Editar</button>
-              <button type="button" className="btn btn-danger">Deletar</button>
             </div>
           </div>
         </div>
