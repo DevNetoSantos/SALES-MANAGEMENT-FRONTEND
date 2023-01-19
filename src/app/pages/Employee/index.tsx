@@ -4,10 +4,13 @@ import { useAuth } from "../../context/AuthProvider/useAuth";
 import { api } from "../../services/api";
 import { TypeEmployee } from "../../Types/TypesEmployee";
 import styles from '../Employee/Employee.module.css';
+import { TbListDetails } from 'react-icons/tb';
+import { AiFillEdit, AiFillDelete } from 'react-icons/ai'
+import { Link } from "react-router-dom";
 
 export const Employee = () => {
   const [employee, setEmployee] = useState<TypeEmployee[]>([]);
-  const [takePage, setTakePage] = useState(1); //mudar depois para 5
+  const [takePage, setTakePage] = useState(8); //number pagination
   const [skipPage, setSkipPage] = useState(1);
 
   const [item,setItem] = useState({
@@ -66,7 +69,7 @@ export const Employee = () => {
             <th scope="col">Nome</th>
             <th scope="col">Sobrenome</th>
             <th scope="col">Email</th>
-            <th scope="col">Action</th>
+            <th scope="col">Ação</th>
           </tr>
         </thead>
         <tbody>
@@ -76,9 +79,11 @@ export const Employee = () => {
               <td>{item.lastname}</td>
               <td>{item.email}</td>
               <td>
-                <button type="button" className="btn btn-primary"  onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  View
-                </button>
+                <TbListDetails className={styles.iconsAction} onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal"/>
+                <Link to="#">
+                  <AiFillEdit className={styles.iconsAction} />
+                </Link>
+                <AiFillDelete className={styles.iconsAction} />
               </td>
             </tr>
           ))}

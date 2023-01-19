@@ -3,3 +3,10 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+.iconsAction {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  margin-left: 5px;
+}
