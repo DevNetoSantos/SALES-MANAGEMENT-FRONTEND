@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../../context/AuthProvider/useAuth';
 import * as yup from "yup";
 import { useNavigate } from 'react-router-dom';
-import styles from '../newEmployee/newEmployee.module.css'
+import styles from '../NewEmployee/newEmployee.module.css'
 
 interface IFormInputs {
   name: string;

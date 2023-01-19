@@ -1,7 +1,10 @@
+import { EditEmployee } from '../../components/EditEmployee';
 import styles from '../AlterEmployee/AlterEmployee.module.css'
 
 export const AlterEmployee = () => {
   return(
-    <h1>Edit Employee</h1>  
+    <div className={styles.container}>
+      <EditEmployee />
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-import { NewEmployee } from "../../components/newEmployee";
+import { NewEmployee } from "../../components/NewEmployee";
 import styles from '../AddEmployee/addEmployee.module.css'
 
 export const AddEmployee = () => {
