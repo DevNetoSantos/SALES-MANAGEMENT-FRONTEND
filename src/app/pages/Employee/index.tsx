@@ -47,6 +47,20 @@ export const Employee = () => {
     }
   }
 
+  const deleteEmployee = async (id: number) => {
+    await api.delete(`employee/${id}`, {
+      headers: {
+        Authorization: `Bearer ${auth.access_token}`
+      }
+    })
+    .then(()=>{
+      window.location.reload()
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
+
   useEffect(()=>{
     getEmployee()
   }, []);
@@ -83,7 +97,7 @@ export const Employee = () => {
                 <Link to="#">
                   <AiFillEdit className={styles.iconsAction} />
                 </Link>
-                <AiFillDelete className={styles.iconsAction} />
+                <AiFillDelete className={styles.iconsAction} onClick={(e)=>deleteEmployee(item.id)} />
               </td>
             </tr>
           ))}
