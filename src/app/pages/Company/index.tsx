@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 export const Company = () => {
   const [company, setCompany] = useState<TypeCompany[]>([]);
-  const [takePage, setTakePage] = useState(1); //mudar depois para 5
+  const [takePage, setTakePage] = useState(8); //number item for page
   const [skipPage, setSkipPage] = useState(1);
   const [search, setSearch] = useState('');
   const [item,setItem] = useState({

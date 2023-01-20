@@ -1,5 +1,10 @@
+import { EditCompany } from "../../components/EditCompany";
+import styles from '../AlterCompany/AlterCompany.module.css'
+
 export const AlterCompany = () => {
   return(
-    <h1>Editar empresa</h1>
+    <div className={styles.container}>
+      <EditCompany />
+    </div>
   );
 }
