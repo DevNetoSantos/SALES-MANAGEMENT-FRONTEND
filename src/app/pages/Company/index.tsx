@@ -4,6 +4,9 @@ import { useAuth } from '../../context/AuthProvider/useAuth';
 import { api } from '../../services/api';
 import { TypeCompany } from '../../Types/TypesCompany';
 import styles from '../Company/Company.module.css';
+import { TbListDetails } from 'react-icons/tb';
+import { AiFillEdit, AiFillDelete } from 'react-icons/ai'
+import { Link } from 'react-router-dom';
 
 export const Company = () => {
   const [company, setCompany] = useState<TypeCompany[]>([]);
@@ -52,14 +55,42 @@ export const Company = () => {
     setItem(response.data)
   }
 
+  const deleteCompany = async (id: number) => {
+    await api.delete(`company/${id}`, {
+      headers: {
+        Authorization: `Bearer ${auth.access_token}`
+      }
+    })
+    .then(()=>{
+      window.location.reload()
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
+
   return(
     <div className={styles.container}>
+      <div className={styles.containerTitle}>
+        <Link className='link' to="/newcompany">
+          <button className='btn btn-primary'>Nova Empresa</button>
+        </Link>
+        <div className={styles.buttonTitle}>
+          <input type='search' placeholder='Buscar'
+          //value={search}
+          //onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+      </div>
+      <div>
+        <h1>Empresas</h1>
+      </div>
       <table className="table">
         <thead>
           <tr>
             <th scope="col">Nome</th>
             <th scope="col">CNPJ</th>
-            <th scope="col">Action</th>
+            <th scope="col">Ação</th>
           </tr>
         </thead>
         <tbody>
@@ -67,10 +98,12 @@ export const Company = () => {
             <tr key={index}>
               <td>{item.name}</td>
               <td>{item.cnpj}</td>
-              <td>
-                <button type="button" className="btn btn-primary"  onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  View
-                </button>
+              <td className={styles.tdAction}>
+                <TbListDetails className={styles.iconsAction} onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal"/>
+                <Link to={{pathname: `/editcompany/${item.id}`}}>
+                  <AiFillEdit className={styles.iconsAction}/>
+                </Link>
+                <AiFillDelete className={styles.iconsAction} onClick={(e)=>deleteCompany(item.id)}/>
               </td>
             </tr>  
           ))}
@@ -94,8 +127,6 @@ export const Company = () => {
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" className="btn btn-primary">Editar</button>
-              <button type="button" className="btn btn-danger">Deletar</button>
             </div>
           </div>
         </div>

@@ -1,5 +1,31 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+}
+
+.iconsAction {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.containerTitle {
+  display: flex;
+}
+
+h1 {
+  text-align: center;
+}
+
+.buttonTitle input {
+  display: flex;
+  justify-content: end;
+  position: absolute;
+  margin-left: 12px;
+  margin-top: 2px;
+  outline: none;
+  border-radius: 10px;
+  border: 0;
+  height: 35px;
 }
