@@ -12,6 +12,7 @@ export const Company = () => {
   const [company, setCompany] = useState<TypeCompany[]>([]);
   const [takePage, setTakePage] = useState(1); //mudar depois para 5
   const [skipPage, setSkipPage] = useState(1);
+  const [search, setSearch] = useState('');
   const [item,setItem] = useState({
     id: '',
     createdAt: '',
@@ -69,6 +70,10 @@ export const Company = () => {
     })
   }
 
+  const searchLowercase = search.toLocaleLowerCase();
+  const teams =  currentClient.filter((team) =>
+    team.name.toLocaleLowerCase().includes(searchLowercase)) //button search
+
   return(
     <div className={styles.container}>
       <div className={styles.containerTitle}>
@@ -77,8 +82,8 @@ export const Company = () => {
         </Link>
         <div className={styles.buttonTitle}>
           <input type='search' placeholder='Buscar'
-          //value={search}
-          //onChange={(e) => setSearch(e.target.value)}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       </div>
@@ -94,7 +99,7 @@ export const Company = () => {
           </tr>
         </thead>
         <tbody>
-          {currentClient.map((item, index) =>(
+          {teams.map((item, index) =>(
             <tr key={index}>
               <td>{item.name}</td>
               <td>{item.cnpj}</td>
