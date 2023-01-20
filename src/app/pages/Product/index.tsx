@@ -12,6 +12,7 @@ export const Product = () => {
   const [product, setProduct] = useState<TypeProduct[]>([]);
   const [takePage, setTakePage] = useState(1); //mudar depois para 5
   const [skipPage, setSkipPage] = useState(1);
+  const [search, setSearch] = useState('');
   const [item,setItem] = useState({
     id: '',
     createdAt: '',
@@ -60,8 +61,27 @@ export const Product = () => {
     setItem(response.data)
   }
 
+  const searchLowercase = search.toLocaleLowerCase();
+  const teams =  currentProduct.filter((team) =>
+    team.name.toLocaleLowerCase().includes(searchLowercase)) //button search
+
   return(
     <div className={styles.container}>
+      <div className={styles.containerTitle}>
+        <Link className='link' to="/newproduct">
+          <button className='btn btn-primary'>Novo Produto</button>
+        </Link>
+        <div className={styles.buttonTitle}>
+          <input type='search' placeholder='Buscar'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+      </div>
+      <div>
+        <h1>Produtos</h1>
+      </div>
+      <hr />
     <table className="table">
       <thead>
         <tr>
@@ -76,7 +96,7 @@ export const Product = () => {
         </tr>
       </thead>
       <tbody>
-        {currentProduct.map((item, index) =>(
+        {teams.map((item, index) =>(
           <tr key={index}>
             <td>{item.name}</td>
             <td>{item.trader_comme}</td>
@@ -87,7 +107,7 @@ export const Product = () => {
             <td>{item.due_date}</td>
             <td>
               <TbListDetails className={styles.iconsAction} onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal"/>
-              <Link to="#">
+              <Link to={{pathname: `/editproduct/${item.id}`}}>
                 <AiFillEdit className={styles.iconsAction}/>
               </Link>
               <AiFillDelete className={styles.iconsAction}/>

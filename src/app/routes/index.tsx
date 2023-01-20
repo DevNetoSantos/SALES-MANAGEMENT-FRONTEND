@@ -13,6 +13,8 @@ import { AlterEmployee } from "../pages/AlterEmployee"
 import { AddEmployee } from "../pages/AddEmployee"
 import { AddCompany } from "../pages/AddCompany"
 import { AlterCompany } from "../pages/AlterCompany"
+import { AddProduct } from "../pages/AddProduct"
+import { AlterProduct } from "../pages/AlterProduct"
 
 export const AppRoutes = () => {
   return(
@@ -31,6 +33,8 @@ export const AppRoutes = () => {
           <Route path="/newcompany"  element={<AddCompany />}/>
           <Route path="/editcompany/:id" element={<AlterCompany/>}/>
           <Route path="/product"  element={<Product />}/>
+          <Route path="/newproduct" element={<AddProduct />}/>
+          <Route path="/editproduct/:id" element={<AlterProduct/>}/>
           <Route path="/sale"  element={<Sale />}/>
         </Route>
       </Route>

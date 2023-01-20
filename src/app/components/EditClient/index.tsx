@@ -26,8 +26,6 @@ export const EditClient = () => {
   resolver: yupResolver(schema)
 });
 
-
-
  useEffect(()=>{
   api.get(`client/${id}`, {
     headers: {
@@ -40,10 +38,10 @@ export const EditClient = () => {
   })
 }, []) 
 
-const onSubmit = async (data: IFormInputs) => await api.patch(`client/${id}`, data, {
-  headers: {
-    Authorization: `Bearer ${auth.access_token}`
-  }
+  const onSubmit = async (data: IFormInputs) => await api.patch(`client/${id}`, data, {
+    headers: {
+      Authorization: `Bearer ${auth.access_token}`
+    }
   })
   .then(()=>{
     return navigate("/client");
