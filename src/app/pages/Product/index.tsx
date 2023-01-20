@@ -4,6 +4,9 @@ import { useAuth } from '../../context/AuthProvider/useAuth';
 import { api } from '../../services/api';
 import { TypeProduct } from '../../Types/TypesProduct';
 import styles from '../Product/Product.module.css';
+import { TbListDetails } from 'react-icons/tb';
+import { AiFillEdit, AiFillDelete } from 'react-icons/ai'
+import { Link } from 'react-router-dom';
 
 export const Product = () => {
   const [product, setProduct] = useState<TypeProduct[]>([]);
@@ -69,7 +72,7 @@ export const Product = () => {
           <th scope="col">Valor Revenda</th>
           <th scope="col">Data Fabricação</th>
           <th scope="col">Data Vencimento</th>
-          <th scope="col">Action</th>
+          <th scope="col">Ação</th>
         </tr>
       </thead>
       <tbody>
@@ -83,9 +86,11 @@ export const Product = () => {
             <td>{item.data_fabrication}</td>
             <td>{item.due_date}</td>
             <td>
-              <button type="button" className="btn btn-primary"  onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
-                View
-              </button>
+              <TbListDetails className={styles.iconsAction} onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal"/>
+              <Link to="#">
+                <AiFillEdit className={styles.iconsAction}/>
+              </Link>
+              <AiFillDelete className={styles.iconsAction}/>
             </td>
           </tr>  
         ))}
