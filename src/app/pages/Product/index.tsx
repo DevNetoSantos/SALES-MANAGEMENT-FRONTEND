@@ -153,8 +153,6 @@ export const Product = () => {
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" className="btn btn-primary">Editar</button>
-            <button type="button" className="btn btn-danger">Deletar</button>
           </div>
         </div>
       </div>

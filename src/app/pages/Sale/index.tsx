@@ -4,11 +4,15 @@ import { useAuth } from '../../context/AuthProvider/useAuth';
 import { api } from '../../services/api';
 import { TypeSale } from '../../Types/TypesSale';
 import styles from '../Sale/Sale.module.css';
+import { TbListDetails } from 'react-icons/tb';
+import { AiFillEdit, AiFillDelete } from 'react-icons/ai'
+import { Link } from 'react-router-dom';
 
 export const Sale = () => {
   const [sale, setSale] = useState<TypeSale[]>([]);
   const [takePage, setTakePage] = useState(1); //mudar depois para 5
   const [skipPage, setSkipPage] = useState(1);
+  const [search, setSearch] = useState('');
   const [item,setItem] = useState({
     id: '',
     createdAt: '',
@@ -54,12 +58,27 @@ export const Sale = () => {
 
   return(
     <div className={styles.container}>
+      <div className={styles.containerTitle}>
+        <Link className='link' to="/newsale">
+          <button className='btn btn-primary'>Nova Venda</button>
+        </Link>
+        <div className={styles.buttonTitle}>
+          <input type='search' placeholder='Buscar'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+      </div>
+      <div>
+        <h1>Vendas</h1>
+      </div>
+      <hr />
       <table className="table">
         <thead>
           <tr>
             <th scope="col">Quantidade de Produto</th>
             <th scope="col">Valor a Pagar</th>
-            <th scope="col">Action</th>
+            <th scope="col">Ação</th>
           </tr>
         </thead>
         <tbody>
@@ -68,9 +87,11 @@ export const Sale = () => {
               <td>{item.qts_product}</td>
               <td>{item.pay_value}</td>
               <td>
-                <button type="button" className="btn btn-primary"  onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  View
-                </button>
+                <TbListDetails className={styles.iconsAction} onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal"/>
+                <AiFillDelete className={styles.iconsAction}/>
+                <Link to="#">
+                  <AiFillEdit className={styles.iconsAction}/>
+                </Link>
               </td>
             </tr>  
           ))}
@@ -94,8 +115,6 @@ export const Sale = () => {
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" className="btn btn-primary">Editar</button>
-              <button type="button" className="btn btn-danger">Deletar</button>
             </div>
           </div>
         </div>

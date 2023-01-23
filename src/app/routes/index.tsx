@@ -15,6 +15,7 @@ import { AddCompany } from "../pages/AddCompany"
 import { AlterCompany } from "../pages/AlterCompany"
 import { AddProduct } from "../pages/AddProduct"
 import { AlterProduct } from "../pages/AlterProduct"
+import { AddSale } from "../pages/AddSale"
 
 export const AppRoutes = () => {
   return(
@@ -36,6 +37,7 @@ export const AppRoutes = () => {
           <Route path="/newproduct" element={<AddProduct />}/>
           <Route path="/editproduct/:id" element={<AlterProduct/>}/>
           <Route path="/sale"  element={<Sale />}/>
+          <Route path="/newsale" element={<AddSale />}/>
         </Route>
       </Route>
 
