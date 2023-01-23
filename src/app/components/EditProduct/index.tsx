@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 interface IFormInputs {
   name: string;
   trader_comme: string;
-  qnts_item: string;
+  qts_item: string;
   value_sale: string;
   data_fabrication: string;
   due_date?: string;
@@ -19,7 +19,7 @@ interface IFormInputs {
 const schema = yup.object({
   name: yup.string().required('campo nome e obrigatório'),
   trader_comme: yup.string(),
-  qnts_item: yup.string(),
+  qts_item: yup.string(),
   value_sale: yup.string(),
   data_fabrication: yup.string(),
   due_date: yup.string()
@@ -43,7 +43,7 @@ useEffect(()=>{
   .then((res)=>{
     setValue('name', res.data.name)
     setValue('trader_comme', res.data.trader_comme)
-    setValue('qnts_item', res.data.qnts_item)
+    setValue('qts_item', res.data.qts_item)
     setValue('value_sale', res.data.value_sale)
     setValue('data_fabrication', res.data.data_fabrication)
     setValue('due_date', res.data.due_date)
@@ -68,7 +68,7 @@ const onSubmit = async (data: IFormInputs) => api.patch(`product/${id}`, data, {
           <form onSubmit={handleSubmit(onSubmit)}>
 
             <div>
-              <h1>Novo Cliente</h1>
+              <h1>Editar Produto</h1>
             </div>
             <hr />
             <div className={styles.formItem}>
@@ -84,9 +84,9 @@ const onSubmit = async (data: IFormInputs) => api.patch(`product/${id}`, data, {
             </div>
 
             <div className={styles.formItem}>
-              <label htmlFor="qnts_item">Quantidade</label><br />
-              <input type="number" {...register("qnts_item")}/>
-              <p>{errors.qnts_item?.message}</p> 
+              <label htmlFor="qts_item">Quantidade</label><br />
+              <input type="number" {...register("qts_item")}/>
+              <p>{errors.qts_item?.message}</p> 
             </div>
 
             <div className={styles.formItem}>
@@ -107,7 +107,7 @@ const onSubmit = async (data: IFormInputs) => api.patch(`product/${id}`, data, {
               <p>{errors.due_date?.message}</p>
             </div>
 
-            <button className='btn btn-primary' type='submit' >Adicionar</button>
+            <button className='btn btn-primary' type='submit' >Salvar</button>
 
           </form>
         </div>
