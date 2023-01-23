@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 export const Product = () => {
   const [product, setProduct] = useState<TypeProduct[]>([]);
-  const [takePage, setTakePage] = useState(1); //mudar depois para 5
+  const [takePage, setTakePage] = useState(8); //mudar depois para 5
   const [skipPage, setSkipPage] = useState(1);
   const [search, setSearch] = useState('');
   const [item,setItem] = useState({
@@ -59,6 +59,20 @@ export const Product = () => {
       }
     })
     setItem(response.data)
+  }
+
+  const deleteProduct = async (id: number) => {
+    await api.delete(`product/${id}`, {
+      headers: {
+        Authorization: `Bearer ${auth.access_token}`
+      }
+    })
+    .then(()=>{
+      window.location.reload()
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
   }
 
   const searchLowercase = search.toLocaleLowerCase();
@@ -110,7 +124,7 @@ export const Product = () => {
               <Link to={{pathname: `/editproduct/${item.id}`}}>
                 <AiFillEdit className={styles.iconsAction}/>
               </Link>
-              <AiFillDelete className={styles.iconsAction}/>
+              <AiFillDelete className={styles.iconsAction} onClick={(e)=>deleteProduct(item.id)}/>
             </td>
           </tr>  
         ))}

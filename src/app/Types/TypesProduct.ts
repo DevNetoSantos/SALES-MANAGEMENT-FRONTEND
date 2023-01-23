@@ -9,4 +9,5 @@ export type TypeProduct = {
   value_sale: string;
   data_fabrication: string;
   due_date: string;
+  companyId: number;
 }

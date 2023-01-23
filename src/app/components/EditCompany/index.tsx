@@ -57,7 +57,7 @@ const onSubmit = async (data: IFormInputs) => await api.patch(`company/${id}`, d
       <div className={styles.areaForm}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <h1>Editar Cliente</h1>
+            <h1>Editar Empresa</h1>
           </div>
           <hr />
           <div className={styles.formItem}>

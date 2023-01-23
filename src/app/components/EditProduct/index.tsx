@@ -97,13 +97,13 @@ const onSubmit = async (data: IFormInputs) => api.patch(`product/${id}`, data, {
 
             <div className={styles.formItem}>
               <label htmlFor="data_fabrication">Data de Fabricação</label><br />
-              <input type="date" {...register("data_fabrication")}/>
+              <input type="text" {...register("data_fabrication")}/>
               <p>{errors.data_fabrication?.message}</p>
             </div>
 
             <div className={styles.formItem}>
               <label htmlFor="due_date">Data de Vencimento</label><br />
-              <input type="date" {...register("due_date")}/>
+              <input type="text" {...register("due_date")}/>
               <p>{errors.due_date?.message}</p>
             </div>
 

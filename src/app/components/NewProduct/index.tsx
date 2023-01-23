@@ -5,26 +5,30 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../../context/AuthProvider/useAuth';
 import * as yup from "yup";
 import { useNavigate } from 'react-router-dom';
+import { traderComme } from '../../hooks/useTraderComme';
 
 interface IFormInputs {
   name: string;
   trader_comme: string;
-  qnts_item: string;
+  qts_item: string;
   value_sale: string;
   data_fabrication: string;
   due_date?: string;
+  companyId: number
 }
 
 const schema = yup.object({
   name: yup.string().required('campo nome e obrigatório'),
   trader_comme: yup.string(),
-  qnts_item: yup.string(),
+  qts_item: yup.string(),
   value_sale: yup.string(),
   data_fabrication: yup.string(),
-  due_date: yup.string()
+  due_date: yup.string(),
+  companyId: yup.number()
 }).required();
 
 export const NewProduct = () => {
+  const { trader } = traderComme();
  const auth = useAuth()
  let navigate = useNavigate();
 
@@ -32,7 +36,7 @@ export const NewProduct = () => {
   resolver: yupResolver(schema)
 });
 
-const onSubmit = async (data: IFormInputs) => api.post('product', data, {
+const onSubmit = async (data: IFormInputs) =>  api.post('product', data, {
   headers: {
     Authorization: `Bearer ${auth.access_token}`
   }
@@ -42,7 +46,7 @@ const onSubmit = async (data: IFormInputs) => api.post('product', data, {
 })
 .catch((error)=>{
   console.log(error)
-})
+});
 
   return(
     <div className={styles.container}>
@@ -50,7 +54,7 @@ const onSubmit = async (data: IFormInputs) => api.post('product', data, {
           <form onSubmit={handleSubmit(onSubmit)}>
 
             <div>
-              <h1>Novo Cliente</h1>
+              <h1>Novo Produto</h1>
             </div>
             <hr />
             <div className={styles.formItem}>
@@ -60,15 +64,25 @@ const onSubmit = async (data: IFormInputs) => api.post('product', data, {
             </div>
 
             <div className={styles.formItem}>
-              <label htmlFor="trader_comme">Comercinate</label><br />
+              <label htmlFor="trader_comme">Comerciante</label><br />
               <input type="text" {...register("trader_comme")}/>
               <p>{errors.trader_comme?.message}</p> 
             </div>
 
             <div className={styles.formItem}>
-              <label htmlFor="qnts_item">Quantidade</label><br />
-              <input type="number" {...register("qnts_item")}/>
-              <p>{errors.qnts_item?.message}</p> 
+              <label htmlFor="companyId">Empresa</label><br />
+                <select {...register("companyId")}>
+                  {trader.map((item) => (
+                    <option value={item.id}>{item.name}</option>
+                  ))}
+                </select>
+                <p>{errors.companyId?.message}</p> 
+            </div>
+
+            <div className={styles.formItem}>
+              <label htmlFor="qts_item">Quantidade</label><br />
+              <input type="number" {...register("qts_item")}/>
+              <p>{errors.qts_item?.message}</p> 
             </div>
 
             <div className={styles.formItem}>
