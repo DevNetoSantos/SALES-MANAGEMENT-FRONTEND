@@ -5,6 +5,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../../context/AuthProvider/useAuth';
 import * as yup from "yup";
 import { useNavigate } from 'react-router-dom';
+import { useClient } from '../../hooks/useClient';
+import { useEmployee } from '../../hooks/useEmployee';
+import { useProduct } from '../../hooks/useProduct';
 
 interface IFormInputs {
   qts_product: string;
@@ -17,13 +20,16 @@ interface IFormInputs {
 const schema = yup.object({
   qts_product: yup.string(),
   pay_value: yup.string(),
-  clientId: yup.string(),
-  employeeId: yup.string(),
-  productId: yup.string()
+  clientId: yup.number(),
+  employeeId: yup.number(),
+  productId: yup.number()
 }).required();
 
 export const NewSale = () => {
  const auth = useAuth()
+ const { client } = useClient();
+ const { employee } = useEmployee();
+ const { product } = useProduct();
  let navigate = useNavigate();
 
  const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>({
@@ -66,7 +72,10 @@ const onSubmit = async (data: IFormInputs) => api.post('sale', data, {
             <div className={styles.formItem}>
               <label htmlFor="clientId">Cliente</label><br />
                 <select {...register("clientId")}>
-
+                  {client.map((item) => (
+                    <option value={item.id}>{item.name}</option>
+                  ))}
+                <option value="" selected>--- Escolha ---</option>
                 </select>
                 <p>{errors.clientId?.message}</p> 
             </div>
@@ -74,7 +83,10 @@ const onSubmit = async (data: IFormInputs) => api.post('sale', data, {
             <div className={styles.formItem}>
               <label htmlFor="employeeId">Funcionário</label><br />
                 <select {...register("employeeId")}>
-                  
+                  {employee.map((item) => (
+                    <option value={item.id}>{item.name}</option>  
+                  ))}
+                <option value="" selected>--- Escolha ---</option>
                 </select>
                 <p>{errors.employeeId?.message}</p> 
             </div>
@@ -82,9 +94,12 @@ const onSubmit = async (data: IFormInputs) => api.post('sale', data, {
             <div className={styles.formItem}>
               <label htmlFor="productId">Produto</label><br />
                 <select {...register("productId")}>
-                  
+                {product.map((item) => (
+                    <option value={item.id}>{item.name}</option>
+                  ))}
+                <option value="" selected>--- Escolha ---</option>
                 </select>
-                <p>{errors.productId?.message}</p> 
+                <p>{errors.productId?.message}</p>
             </div>
 
             <button className='btn btn-primary' type='submit' >Criar</button>

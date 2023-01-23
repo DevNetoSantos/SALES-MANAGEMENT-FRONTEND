@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 export const Sale = () => {
   const [sale, setSale] = useState<TypeSale[]>([]);
-  const [takePage, setTakePage] = useState(1); //mudar depois para 5
+  const [takePage, setTakePage] = useState(8); //mudar depois para 5
   const [skipPage, setSkipPage] = useState(1);
   const [search, setSearch] = useState('');
   const [item,setItem] = useState({
