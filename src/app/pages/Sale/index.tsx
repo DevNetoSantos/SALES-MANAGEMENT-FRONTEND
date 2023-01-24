@@ -56,6 +56,10 @@ export const Sale = () => {
     setItem(response.data)
   }
 
+  const searchLowercase = search.toLocaleLowerCase();
+  const teams =  currentSale.filter((team) =>
+    team.client.name.toLocaleLowerCase().includes(searchLowercase));//button search
+
   return(
     <div className={styles.container}>
       <div className={styles.containerTitle}>
@@ -76,16 +80,22 @@ export const Sale = () => {
       <table className="table">
         <thead>
           <tr>
-            <th scope="col">Quantidade de Produto</th>
+            <th scope="col">Funcionário</th>
+            <th scope="col">Produto</th>
+            <th scope="col">Quantidade</th>
             <th scope="col">Valor a Pagar</th>
+            <th scope="col">Client</th>
             <th scope="col">Ação</th>
           </tr>
         </thead>
         <tbody>
-          {currentSale.map((item, index) =>(
+          {teams.map((item, index) =>(
             <tr key={index}>
+              <td>{item.employee.name}</td>
+              <td>{item.product.name}</td>
               <td>{item.qts_product}</td>
               <td>{item.pay_value}</td>
+              <td>{item.client.name}</td>
               <td>
                 <TbListDetails className={styles.iconsAction} onClick={(e)=>showDetail(item.id)} data-bs-toggle="modal" data-bs-target="#exampleModal"/>
                 <AiFillDelete className={styles.iconsAction}/>
