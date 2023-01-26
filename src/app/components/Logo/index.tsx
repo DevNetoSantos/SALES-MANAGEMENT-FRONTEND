@@ -1,6 +1,6 @@
 import { useAuth } from '../../context/AuthProvider/useAuth';
 import styles from '../Logo/Logo.module.css';
-import { FiLogOut } from 'react-icons/fi'
+import { FcNext } from 'react-icons/fc'
 
 export const Logo = () => {
   const auth = useAuth()
@@ -11,9 +11,9 @@ export const Logo = () => {
 
   return(
     <div className={styles.container}>
-      <div>Olá, {auth.email}</div>
+      <h4>Olá, {auth.email}</h4>
       <div className={styles.logoutButton}>
-        <FiLogOut onClick={logou} className={styles.iconLogo}/> 
+        <FcNext onClick={logou} className={styles.iconLogo}/> 
         <p>Sair</p>
       </div>
     </div>

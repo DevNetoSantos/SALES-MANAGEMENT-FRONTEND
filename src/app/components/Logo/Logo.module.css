@@ -1,5 +1,5 @@
 .container {
-  background-color: aliceblue;
+  background-color: #212529;
   grid-row: 1;
   grid-column: 1;
   display: flex;
@@ -11,10 +11,15 @@
 .logoutButton {
   display: flex;
   margin-top: 5px;
+  color: #919395;
 }
 
 .iconLogo {
   width: 24px;
   height: 24px;
   cursor: pointer;
+}
+
+.container h4 {
+  color: #919395;
 }

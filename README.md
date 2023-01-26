@@ -9,9 +9,7 @@
 
 # Image project
 
-![login](https://user-images.githubusercontent.com/89228679/206308771-a469938e-1947-41b4-a68e-a51937d45b4b.png)
-![dasboard](https://user-images.githubusercontent.com/89228679/210173325-73c35e8c-9fb9-49ea-88fe-fe43019b3ff7.png)
-![dasdetails](https://user-images.githubusercontent.com/89228679/210173361-e79af692-f704-49cf-9efd-abd360de24b6.png)
+![new](https://user-images.githubusercontent.com/89228679/214865360-6dc3f6e9-a88c-4c87-b343-0eebc30f64b9.png)
 
 
 ## Stay in touch
